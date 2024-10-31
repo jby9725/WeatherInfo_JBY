@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Information</title>
+</head>
+<body>
+<h1 th:text="'날씨 정보 - ' + ${city}"></h1>
+
+<!-- 도시 조회 폼 -->
+<form action="/weather/result" method="get">
+  <label for="city">도시 이름: </label>
+  <input type="text" id="city" name="city" placeholder="도시 입력" />
+  <button type="submit">조회</button>
+</form>
+
+<!-- 날씨 데이터가 있을 경우 표시 -->
+<div th:if="${weatherData}">
+  <h2>현재 날씨</h2>
+  <p>온도: <span th:text="${weatherData['main'].temp}"></span> °C</p>
+  <p>체감 온도: <span th:text="${weatherData['main'].feels_like}"></span> °C</p>
+  <p>습도: <span th:text="${weatherData['main'].humidity}"></span>%</p>
+  <p>풍속: <span th:text="${weatherData['wind'].speed}"></span> m/s</p>
+  <p>날씨: <span th:text="${weatherData['weather'][0].description}"></span></p>
+</div>
+</body>
+</html>
